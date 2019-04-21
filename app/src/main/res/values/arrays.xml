@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="guesses_list">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    
+    <string-array name="groups_list">
+        <item>ASTRO</item>
+        <item>EXO</item>
+        <item>BTS</item>
+        <item>BAP</item>
+        <item>BIG_BANG</item>
+        <item>GOT7</item>
+    </string-array>
+
+    <string-array name="groups_list_for_settings">
+        <item>ASTRO</item>
+        <item>EXO</item>
+        <item>BTS</item>
+        <item>BAP</item>
+        <item>BIG BANG</item>
+        <item>GOT7</item>
+    </string-array>
+
+</resources>
