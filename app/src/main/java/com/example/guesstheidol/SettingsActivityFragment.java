@@ -1,6 +1,7 @@
 package com.example.guesstheidol;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.MultiSelectListPreference;
@@ -41,6 +42,7 @@ implements SharedPreferences.OnSharedPreferenceChangeListener{
         Log.i("SettingsActivityFrag", "on shared preferences changed called" + key);
         switch(key){
             case "choicesSelection":
+                getActivity().navigateUpTo(new Intent(getContext(), MainActivity.class));
                 break;
 
             case "groupsSelection":
