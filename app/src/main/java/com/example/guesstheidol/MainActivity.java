@@ -1,6 +1,7 @@
 package com.example.guesstheidol;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -8,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +21,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Set<String> groups = sharedPreferences.getStringSet("groupsSelection", new HashSet<String>());
+
+        if(groups.size() == 0){
+            groups.add("ASTRO");
+            sharedPreferences.edit().putStringSet("groupsSelection", groups).apply();
+        }
+
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
     }
