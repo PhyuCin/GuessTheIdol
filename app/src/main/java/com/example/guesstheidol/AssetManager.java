@@ -24,16 +24,10 @@ public class AssetManager {
             try {
                 String[] localPaths = context.getAssets().list(groupName);
                 System.out.println("localPaths: " + Arrays.toString(localPaths));
-                for(String localPath : localPaths){
-                    String idolName = localPath
-                            .split("-")[1]
-                            .split("\\.")[0]
-                            .replace("-", " ");
-                    idolNames.add(idolName);
-                }
 
-                groupMembers.put(groupName, idolNames);
-                System.out.println("groupMembers: " + groupMembers);
+//                for(String LocalPath : localPaths) {
+//                    String idolName = localPath.split
+//                }
 
             } catch (IOException e){
                 Log.e("AssetManager", e.toString());
