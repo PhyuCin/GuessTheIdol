@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Set<String> groups = sharedPreferences.getStringSet("groupsSelection", new HashSet<String>());
 
-        assert groups != null;
         if(groups.size() == 0){
             groups.add("ASTRO");
             sharedPreferences.edit().putStringSet("groupsSelection", groups).apply();
