@@ -3,9 +3,9 @@
 
     <ListPreference
         android:defaultValue="4"
-        android:entries="@array/guesses_list"
-        android:entryValues="@array/guesses_list"
-        android:key="preference_1"
+        android:entries="@array/choices_list"
+        android:entryValues="@array/choices_list"
+        android:key="choicesSelection"
         android:summary="@string/number_of_choices_summary"
         android:title="Number of choices" />
 
@@ -13,7 +13,7 @@
         android:defaultValue="@array/groups_list"
         android:entries="@array/groups_list_for_settings"
         android:entryValues="@array/groups_list"
-        android:key="preferences_2"
+        android:key="groupsSelection"
         android:summary="@string/groups_summary"
         android:title="Groups" />
 
