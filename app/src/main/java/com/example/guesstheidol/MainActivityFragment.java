@@ -63,8 +63,9 @@ public class MainActivityFragment extends Fragment {
         int number_of_choices = Integer.parseInt(choiceStr);
 
         List<String> allIdolNames = assetManager.allIdolsForGroup("ASTRO");
-        List<String> idolNames = allIdolNames.subList(0, number_of_choices);
+        List<String> idolNames = allIdolNames;
         Collections.shuffle(idolNames);
+        idolNames = idolNames.subList(0, number_of_choices);
 
         choiceAdapter.addAll(idolNames);
 
