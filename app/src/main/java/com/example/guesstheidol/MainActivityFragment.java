@@ -5,14 +5,17 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -34,7 +37,7 @@ public class MainActivityFragment extends Fragment {
         try {
             assetManager =  new AssetManager(getContext(), groupNames);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("AssetManager", e.toString());
         }
 
     }
@@ -54,15 +57,14 @@ public class MainActivityFragment extends Fragment {
         choiceAdapter = new ArrayAdapter<>(getContext(), R.layout.choice_item);
         choiceItems.setAdapter(choiceAdapter);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String choiceStr = prefs.getString("choicesSelection", "0");
+        String choiceStr = preferences.getString("choicesSelection", "0");
 
         int number_of_choices = Integer.parseInt(choiceStr);
 
-        idolNames = new String[number_of_choices];
-        for(int i = 0; i < idolNames.length; ++i){
-            idolNames[i] = "JinJin " + i;
-        }
+            List<String> allIdolNames = assetManager.allIdolsForGroup("ASTRO");
+            List<String> idolNames = allIdolNames.subList(0, number_of_choices);
+            Collections.shuffle(idolNames);
+
 
         choiceAdapter.addAll(idolNames);
 
