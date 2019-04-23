@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -61,14 +62,14 @@ public class MainActivityFragment extends Fragment {
 
         int number_of_choices = Integer.parseInt(choiceStr);
 
-            List<String> allIdolNames = assetManager.allIdolsForGroup("ASTRO");
-            List<String> idolNames = allIdolNames.subList(0, number_of_choices);
-            Collections.shuffle(idolNames);
-
+        List<String> allIdolNames = assetManager.allIdolsForGroup("ASTRO");
+        List<String> idolNames = allIdolNames.subList(0, number_of_choices);
+        Collections.shuffle(idolNames);
 
         choiceAdapter.addAll(idolNames);
 
-
+        ImageView imageView = (ImageView) mainFragmentView.findViewById(R.id.idolImage);
+        imageView.setImageDrawable((assetManager.imageForIdol(idolNames.get(0))));
         return mainFragmentView;
     }
 }
