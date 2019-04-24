@@ -22,14 +22,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Set<String> groups = sharedPreferences.getStringSet("groupsSelection", new HashSet<String>());
-
-        if(groups.size() == 0){
-            groups.add("ASTRO");
-            sharedPreferences.edit().putStringSet("groupsSelection", groups).apply();
-        }
-
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
     }

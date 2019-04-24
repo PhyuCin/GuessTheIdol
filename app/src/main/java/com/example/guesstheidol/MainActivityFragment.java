@@ -14,29 +14,27 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
+import java.util.Random;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class MainActivityFragment extends Fragment {
 
     private GridView choiceItems;
     private ArrayAdapter<String> choiceAdapter;
-    private String[] idolNames;
     private AssetManager assetManager;
     private SharedPreferences preferences;
+
+    private int number_of_choices;
+    private int correctIdol;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        Set<String> groupNames = preferences.getStringSet("groupsSelection", new HashSet<String>());
         try {
-            assetManager =  new AssetManager(getContext(), groupNames);
+            assetManager =  new AssetManager(getContext());
         } catch (IOException e) {
             Log.e("AssetManager", e.toString());
         }
@@ -60,17 +58,22 @@ public class MainActivityFragment extends Fragment {
 
         String choiceStr = preferences.getString("choicesSelection", "0");
 
-        int number_of_choices = Integer.parseInt(choiceStr);
+        number_of_choices = Integer.parseInt(choiceStr);
 
-        List<String> allIdolNames = assetManager.allIdolsForGroup("ASTRO");
+
+        List<String> allIdolNames = assetManager.allIdolsForGroup();
         List<String> idolNames = allIdolNames;
         Collections.shuffle(idolNames);
         idolNames = idolNames.subList(0, number_of_choices);
 
+        Random rand = new Random();
+        correctIdol = rand.nextInt(number_of_choices);
+
+
         choiceAdapter.addAll(idolNames);
 
         ImageView imageView = (ImageView) mainFragmentView.findViewById(R.id.idolImage);
-        imageView.setImageDrawable((assetManager.imageForIdol(idolNames.get(0))));
+        imageView.setImageDrawable((assetManager.imageForIdol(idolNames.get(correctIdol))));
         return mainFragmentView;
     }
 }

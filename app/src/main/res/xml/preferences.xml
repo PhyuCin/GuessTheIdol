@@ -9,12 +9,12 @@
         android:summary="@string/number_of_choices_summary"
         android:title="Number of choices" />
 
-    <MultiSelectListPreference
-        android:defaultValue="@array/groups_list"
-        android:entries="@array/groups_list_for_settings"
-        android:entryValues="@array/groups_list"
-        android:key="groupsSelection"
-        android:summary="@string/groups_summary"
-        android:title="Groups" />
+    <!--<MultiSelectListPreference-->
+        <!--android:defaultValue="@array/groups_list"-->
+        <!--android:entries="@array/groups_list_for_settings"-->
+        <!--android:entryValues="@array/groups_list"-->
+        <!--android:key="groupsSelection"-->
+        <!--android:summary="@string/groups_summary"-->
+        <!--android:title="Groups" />-->
 
 </PreferenceScreen>

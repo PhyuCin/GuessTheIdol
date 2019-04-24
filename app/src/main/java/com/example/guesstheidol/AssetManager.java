@@ -18,36 +18,34 @@ public class AssetManager {
     private Dictionary<String, List<String>> groupMembers;
     private Context context;
 
-    public AssetManager(Context context, Set<String> groupNames) throws IOException {
+    public AssetManager(Context context) throws IOException {
         this.context = context;
         idolPaths = new Hashtable<>();
         groupMembers = new Hashtable<>();
 
-        for (String groupName : groupNames) {
-            List<String> idolNames = new Vector<>();
-            try {
-                String[] localPaths = context.getAssets().list(groupName);
-                System.out.println("localPaths: " + Arrays.toString(localPaths));
 
-                for(String localPath : localPaths) {
-                    String idolName = localPath
-                            .replace("-", " ")
-                            .replace(".jpg", "")
-                            .replace(".jpeg", "");
-                    idolNames.add(idolName);
-                    idolPaths.put(idolName, groupName + "/" + localPath);
-                }
-                groupMembers.put(groupName, idolNames);
+        List<String> idolNames = new Vector<>();
+        try {
+            String[] localPaths = context.getAssets().list("IDOLS");
+            System.out.println("localPaths: " + Arrays.toString(localPaths));
+             for(String localPath : localPaths) {
+                 String idolName = localPath
+                         .replace("-", " ")
+                         .replace(".jpg", "")
+                         .replace(".jpeg", "");
+                 idolNames.add(idolName);
+                 idolPaths.put(idolName, "IDOLS" + "/" + localPath);
+             }
+             groupMembers.put("IDOLS", idolNames);
 
-            } catch (IOException e){
-                Log.e("AssetManager", e.toString());
-            }
+        } catch (IOException e){
+            Log.e("AssetManager", e.toString());
         }
         System.out.println("groupMembers: " + groupMembers);
     }
 
-    public List<String> allIdolsForGroup (String groupName){
-        return groupMembers.get(groupName);
+    public List<String> allIdolsForGroup (){
+        return groupMembers.get("IDOLS");
     }
 
     public Drawable imageForIdol (String idolName){
