@@ -14,8 +14,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:padding="@dimen/smallPadding"
-        android:text="@string/initialQuestion" />
+        android:padding="@dimen/smallPadding" />
 
     <ImageView
         android:id="@+id/idolImage"
@@ -36,7 +35,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:padding="@dimen/smallPadding"
-        android:text="@string/initialScore" />
+        android:padding="@dimen/smallPadding" />
 
 </LinearLayout>

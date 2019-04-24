@@ -1,6 +1,7 @@
 package com.example.guesstheidol;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -47,6 +48,7 @@ public class MainActivityFragment extends Fragment {
     private TextView scoreStatus;
 
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +62,11 @@ public class MainActivityFragment extends Fragment {
         } catch (IOException e) {
             Log.e("AssetManager", e.toString());
         }
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
-//        pref = this.getActivity().getSharedPreferences("value", Context.MODE_PRIVATE);
         choiceItems.invalidate();
     }
 
@@ -76,19 +76,21 @@ public class MainActivityFragment extends Fragment {
         View mainFragmentView = inflater.inflate(R.layout.fragment_main, container, false);
 
 
-//        questionNumber = preferences.getInt("current question number", 0);
-//        score = preferences.getInt("current score number", 0);
+        questionNumber = preferences.getInt("question number", 1);
+        score = preferences.getInt("current score", 0);
 
         gridView = (GridView) mainFragmentView.findViewById(R.id.choiceItems);
         questionStatus = (TextView)  mainFragmentView.findViewById(R.id.questionStatus);
         scoreStatus = (TextView)  mainFragmentView.findViewById(R.id.scoresStatus);
+
+        questionStatus.setText("Question " + questionNumber + " of 10");
+        scoreStatus.setText("Score " + score + "/10");
 
         choiceItems = (GridView) mainFragmentView.findViewById(R.id.choiceItems);
         choiceAdapter = new ArrayAdapter<>(getContext(), R.layout.choice_item);
         choiceItems.setAdapter(choiceAdapter);
 
         String choiceStr = preferences.getString("choicesSelection", "0");
-
         number_of_choices = Integer.parseInt(choiceStr);
 
 
@@ -113,24 +115,47 @@ public class MainActivityFragment extends Fragment {
 
                 String selectedChoice = parent.getItemAtPosition(position).toString();
 
+
                 if(selectedChoice.equals(idolNames.get(correctIdol))){
-                    //get item for display before set and sort
-                    Toast.makeText(getActivity(),
-                            "Correct!", Toast.LENGTH_LONG).show();
-                    ++score;
-                    ++questionNumber;
+                    if (questionNumber == 10){
+                        ++score;
+                        Toast.makeText(getActivity(),
+                                "Done! Your score is " + score + "/10.", Toast.LENGTH_LONG).show();
+                        questionNumber = 1;
+                        score = 0;
+                    }
+                    else{
+                        Toast.makeText(getActivity(),
+                                "Correct!", Toast.LENGTH_LONG).show();
+                        ++score;
+                        ++questionNumber;
+                    }
 
                 }
                 else{
-                    Toast.makeText(getActivity(),
-                            "Wrong!", Toast.LENGTH_LONG).show();
-                    ++questionNumber;
+                    if (questionNumber == 10){
+                        Toast.makeText(getActivity(),
+                                "Done! Your score is " + score + "/10.", Toast.LENGTH_LONG).show();
+                        questionNumber = 1;
+                        score = 0;
+                    }
+                    else{
+                        Toast.makeText(getActivity(),
+                                "Wrong!", Toast.LENGTH_LONG).show();
+                        ++questionNumber;
+                    }
                 }
+
+                preferences.edit().putInt("question number", questionNumber).apply();
+                preferences.edit().putInt("current score", score).apply();
 
                 questionStatus.setText("Question " + questionNumber + " of 10");
                 scoreStatus.setText("Score " + score + "/10");
 
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
             }
+
         });
 
         return mainFragmentView;
