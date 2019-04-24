@@ -13,16 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Question 1 of 5"
-        android:padding="@dimen/defaultPadding"
-        />
+        android:gravity="center"
+        android:padding="@dimen/smallPadding"
+        android:text="@string/initialQuestion" />
 
     <ImageView
         android:id="@+id/idolImage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
-        android:layout_margin="@dimen/defaultPadding"/>
+        android:layout_weight="4"/>
 
     <GridView
         android:id="@+id/choiceItems"
@@ -30,5 +29,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"/>
+
+    <TextView
+        android:id="@+id/scoresStatus"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="@dimen/smallPadding"
+        android:text="@string/initialScore" />
 
 </LinearLayout>
