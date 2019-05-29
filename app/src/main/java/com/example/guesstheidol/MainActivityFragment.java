@@ -90,7 +90,7 @@ public class MainActivityFragment extends Fragment {
         choiceAdapter = new ArrayAdapter<>(getContext(), R.layout.choice_item);
         choiceItems.setAdapter(choiceAdapter);
 
-        String choiceStr = preferences.getString("choicesSelection", "0");
+        String choiceStr = preferences.getString("choicesSelection", "2");
         number_of_choices = Integer.parseInt(choiceStr);
 
 
